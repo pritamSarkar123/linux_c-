@@ -1,0 +1,70 @@
+nothing but like sum of binomial coefficients
+
+c(0)=c(1)=1
+c(2)=c(0)c(1)+c(1)c(0)
+c(3)=c(0)c(2)+c(1)c(1)+c(2)c(0)
+c(4)=c(0)c(3)+c(1)c(2)+c(2)c(1)+c(3)c(0)
+.
+.
+.
+c(n)=c(0)c(n-1)+c(1)c(n-2)+c(2)c(n-3)+...+c(n-2)c(1)+c(n-1)c(0)
+
+Process one to solve------------------ 
+
+One:- Pure recurssive
+
+function catalen(n){
+	result_cN=0;
+	for(i=0;i<n;i++){
+		result_cN+=catalen(i)*catalen(n-i-1);
+	}	
+}
+<but it takes exponential times > -_-
+
+Two:- memoization with recurssion
+
+memory<>
+function catalen(n){
+	result_cN=0;
+	for(i=0;i<n;i++){
+		flag_i=False;
+		flag_n_i_1=False;
+		val_i,val_n_i_1=0,0;
+		if(catalen(i) in memory){
+			val_i=memory(i);
+			flag_i=True;
+		}
+		if(catalen(n-i-1) in memory){
+			val_n_i_1=memory(n-i-1);
+			flag_n_i_1=True;
+		}
+		if(flag_i==True and flag_n_i_i==False){
+			val_n_i_1=catalen(n-i-1);
+			result_cN+=val_i*val_n_i_1;
+			memory<catalen(n-i-1),val_n_i_1>;
+			continue;
+		}
+		if(flag_i==False and flag_n_i_i==True){
+			val_i=catalen(i);
+			result_cN+=val_i*val_n_i_1;
+			memory<catalen(i),val_i>;
+			continue;
+		}
+		if(flag_i==True and flag_n_i_i==True){
+			result_cN+=val_i*val_n_i_1;
+			continue;
+		}
+		if(flag_i==False and flag_n_i_i==False){
+			val_i=catalen(i);
+			val_n_i_1=catalen(n-i-1);
+			result_cN+=val_i*val_n_i_1;
+			memory<catalen(i),val_i>;
+			memory<catalen(i),val_n_i_1>;
+			continue;
+		}
+	}	
+}
+Three:- c(n)=2nCn/(n+1)===>c(n)=fact(2n)/(fact(2n-n)*fact(n+1)) with memoization
+
+
+
