@@ -35,8 +35,6 @@ bool User::operator == (User user){
 void User::output(){
     std::cout<<"This is User"<<std::endl;
 }
-std::istream &operator >> (std::istream &input,User &user);
-std::ostream &operator << (std::ostream &output,User user);
 
 int User::user_count=0;
 std::istream &operator >> (std::istream &input,User &user){
